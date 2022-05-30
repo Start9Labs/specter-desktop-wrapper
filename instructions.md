@@ -16,19 +16,47 @@ Click on the cog in the top right, or "Update your settings"
 
 <!-- MD_PACKER_INLINE END -->
 
-Click "USB devices"
+Click "USB devices" and then "Remote Specter USB connection"
 
-Click "Remote Specter USB connection"
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-2.png)
+
+<!-- MD_PACKER_INLINE END -->
 
 Click "copy" under step 2
 
-Now start Specter on your *local* machine by either installing the application [here](specter.solutions) or run it in the background by following the instructions [here](https://github.com/cryptoadvance/specter-desktop#installing-specter-from-pip)
+<!-- MD_PACKER_INLINE BEGIN -->
 
-Head to the HWI settings here - http://127.0.0.1:25441/hwi/settings/
+![](./docs/assets/img-3.png)
+
+<!-- MD_PACKER_INLINE END -->
+
+Now start Specter on your *local* machine (**not** your embassy) by either installing the application [here](https://specter.solutions) or run it in the background by following the instructions [here](https://github.com/cryptoadvance/specter-desktop#installing-specter-from-pip)
+
+Once it's up and running, Head to the HWI settings here - http://127.0.0.1:25441/hwi/settings/
+
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-4.png)
+
+<!-- MD_PACKER_INLINE END -->
 
 Paste in the domain that you copied from Specter running on your Embassy and click Update
 
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-5.png)
+
+<!-- MD_PACKER_INLINE END -->
+
 Now connect your Trezor One or other signing device to your local machine
+
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-6.png)
+
+<!-- MD_PACKER_INLINE END -->
 
 Head back to Specter on your Embassy
 
@@ -38,13 +66,31 @@ Then "Test connection"
 
 You should see this along the top of the screen:
 
-You can now click "Add new device"
+<!-- MD_PACKER_INLINE BEGIN -->
 
-Select the type of signing device you're using
+![](./docs/assets/img-7.png)
+
+<!-- MD_PACKER_INLINE END -->
+
+**Note:** At current time of writing, you must hit save **before** hitting test connection.
+
+You can now click "Add new device" and select the type of signing device you're using (in this case, a Trezor)
+
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-8.png)
+
+<!-- MD_PACKER_INLINE END -->
 
 Name the device
 
 And click "Get via USB"
+
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-9.png)
+
+<!-- MD_PACKER_INLINE END -->
 
 You may be asked for you PIN and passphrase here, and you may need to confirm extraction on the signing device
 
