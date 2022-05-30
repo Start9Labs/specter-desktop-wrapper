@@ -102,7 +102,7 @@ Specter will then begin extracting the public key(s) from your device
 
 <!-- MD_PACKER_INLINE END -->
 
-You may not want all the default types of extended public key. Remove/keep the ones you want by clicking "edit"
+You may not want all the default types of extended public key. Remove/keep the ones you want by clicking "edit" and "remove"
 
 Click "Continue"
 
@@ -128,15 +128,15 @@ Name the wallet and select the key(s) you want to use
 
 (If you only have one key, it will automatically use that key)
 
-<!-- MD_PACKER_INLINE BEGIN -->
-
-![](./docs/assets/img-11.png)
-
-<!-- MD_PACKER_INLINE END -->
-
 Select "Scan for existing funds" if you have already used this wallet and wish to establish the transaction history, if this is a brand new wallet this is not necessary and should be deselected.
 
 Click "Create wallet"
+
+<!-- MD_PACKER_INLINE BEGIN --> 
+
+![](./docs/assets/img-11.png)
+
+<!-- MD_PACKER_INLINE END --> 
 
 If you selected "rescan" you can refresh the page and watch as your bitcoin node rescans the blockchain for your wallet's history.
 
@@ -200,14 +200,14 @@ Name the wallet and select the key(s) you want to use
 
 (If you only have one key, it will automatically use that key)
 
+Select "Scan for existing funds" if you have already used this wallet and wish to establish the transaction history, if this is a brand new wallet this is not necessary and should be deselected.
+
+Click "Create wallet"
+
 <!-- MD_PACKER_INLINE BEGIN -->
 
 ![](./docs/assets/img-19.png)
 
 <!-- MD_PACKER_INLINE END -->
 
-Select "Scan for existing funds" if you have already used this wallet and wish to establish the transaction history, if this is a brand new wallet this is not necessary and should be deselected.
-
-Click "Create wallet"
-
-If you select "rescan" you can refresh the page and watch as your bitcoin node rescans the blockchain for your wallet's history.
+If you selected "rescan" you can refresh the page and watch as your bitcoin node rescans the blockchain for your wallet's history.
