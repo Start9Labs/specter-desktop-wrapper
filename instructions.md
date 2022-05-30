@@ -200,7 +200,7 @@ Name the wallet and select the key(s) you want to use
 
 (If you only have one key, it will automatically use that key)
 
-Select "Scan for existing funds" if you have already used this wallet and wish to establish the transaction history, if this is a brand new wallet this is not necessary and should be deselected.
+Select "Scan for existing funds" if you have already used this wallet and wish to establish its transaction history, if this is a brand new wallet this is not necessary and should be deselected.
 
 Click "Create wallet"
 
