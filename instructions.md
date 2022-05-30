@@ -108,11 +108,25 @@ Click "Continue"
 
 You can now "Add new wallet" or "create single key wallet."
 
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-12.png)
+
+<!-- MD_PACKER_INLINE END -->
+
 (If you want to create a multisig wallet, add another device first, and make sure you generated an xpub intented for multisig on the first device, then come back to this step.)
 
 Select the device (or devices if you are making a multisig wallet) that you want to use.
 
-Name the wallet and select the key(s) you want to use.
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-13.png)
+
+<!-- MD_PACKER_INLINE END -->
+
+Name the wallet and select the key(s) you want to use
+
+(If you only have one key, it will automatically use that key)
 
 <!-- MD_PACKER_INLINE BEGIN -->
 
@@ -120,11 +134,11 @@ Name the wallet and select the key(s) you want to use.
 
 <!-- MD_PACKER_INLINE END -->
 
-Select "Scan for existing funds" if you have already used this wallet and wish to establish the transaction history, if this is a brand new wallet this is not necessary.
+Select "Scan for existing funds" if you have already used this wallet and wish to establish the transaction history, if this is a brand new wallet this is not necessary and should be deselected.
 
-Click continue
+Click "Create wallet"
 
-If you select "rescan" you can refresh the page and watch as your bitcoin node rescans the blockchain for your wallet's history.
+If you selected "rescan" you can refresh the page and watch as your bitcoin node rescans the blockchain for your wallet's history.
 
 ## Air Gapped Signing Devices
 
@@ -134,19 +148,47 @@ Power up the Coldcard, enter your pin and any passphrase necessary.
 
 Go down to "Advanced", "MicroSD card", "Export Wallet", "Generic JSON"
 
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-14.png)
+
+<!-- MD_PACKER_INLINE END -->
+
 Remove the SD card from your Coldcard and insert it into your *local* machine (not the Embassy)
 
-Go back to Specter on your Embassy and click "Add new device"
+Go to Specter on your Embassy, click "Add new device" and select Coldcard (or other air gap permitting device)
 
-Click Coldcard (or whatever signing device you are using that permits airgapping)
+<!-- MD_PACKER_INLINE BEGIN -->
 
-Name the device
+![](./docs/assets/img-15.png)
 
-Click "Upload from SD card", navitage to the SD card and select "coldcard-export.json" and click open
+<!-- MD_PACKER_INLINE END -->
+
+Name the device and click "Upload from SD card" 
+
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-16.png)
+
+<!-- MD_PACKER_INLINE END -->
+
+Navitage to the SD card and select "coldcard-export.json" and click open
+
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-17.png)
+
+<!-- MD_PACKER_INLINE END -->
 
 You may not want all the default types of extended public key. Remove/keep the ones you want by clicking "edit"
 
 Click "Continue"
+
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-18.png)
+
+<!-- MD_PACKER_INLINE END -->
 
 You can now "Add new wallet" or "create single key wallet."
 
@@ -154,10 +196,18 @@ You can now "Add new wallet" or "create single key wallet."
 
 Select the device (or devices if you are making a multisig wallet) that you want to use.
 
-Name the wallet and select the key you want to use.
+Name the wallet and select the key(s) you want to use
 
-Select "Scan for existing funds" if you have already used this wallet and wish to establish the transaction history, if this is a brand new wallet this is not necessary.
+(If you only have one key, it will automatically use that key)
 
-Click continue
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-19.png)
+
+<!-- MD_PACKER_INLINE END -->
+
+Select "Scan for existing funds" if you have already used this wallet and wish to establish the transaction history, if this is a brand new wallet this is not necessary and should be deselected.
+
+Click "Create wallet"
 
 If you select "rescan" you can refresh the page and watch as your bitcoin node rescans the blockchain for your wallet's history.
