@@ -1,4 +1,4 @@
-# Usage Instructions
+# Using a Signing Device with Specter
 
 There are two ways to add a wallet to Specter. Some signing devices permit "air gap" which means transferring the xpub (and subsequent unsigned/signed transactions) back and forth between Specter and the signing device via an SD card (Coldcard for example) - other devices require a direct USB connection between the device and Specter (Trezor One for example).
 
@@ -9,6 +9,12 @@ For devices like the Trezor One, air gapping is not possible. This means importi
 Start by heading to Specter running on your Embassy (you can use either Tor or LAN - if you are accessing your Embassy over LAN the Launch UI button will open up the LAN interface for Specter - if you're accessing over Tor it will open up the Tor interface).
 
 Click on the cog in the top right, or "Update your settings"
+
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./assets/img-1.png
+
+<!-- MD_PACKER_INLINE END -->
 
 Click "USB devices"
 
