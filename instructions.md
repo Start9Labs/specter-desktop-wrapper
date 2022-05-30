@@ -8,47 +8,59 @@ For devices like the Trezor One, air gapping is not possible. This means importi
 
 For this to work, your Embassy and your local machine must be on the same LAN.
 
--Start by heading to Specter running on your Embassy and clicking on the cog
+Start by heading to Specter running on your Embassy (you can use either Tor or LAN - if you are accessing your Embassy over LAN the Launch UI button will open up the LAN interface for Specter - if you're accessing over Tor it will open up the Tor interface).
 
-USB devices
+Clicking on the cog in the top right, or clicking on "Update your settings"
+
+Click "USB devices"
 
 Click "Remote Specter USB connection"
 
 Click "copy" under step 2
 
-Now head to your local machine's HWI settings: http://127.0.0.1:25441/hwi/settings/
+Now start Specter on your *local* machine by either installing the application [here](specter.solutions) or run it in the background by following the instructions [here](https://github.com/cryptoadvance/specter-desktop#installing-specter-from-pip)
 
-Paste in the domain for Specter running on your Embassy and click Update
+Head to the HWI settings here - http://127.0.0.1:25441/hwi/settings/
+
+Paste in the domain that you copied from Specter running on your Embassy and click Update
 
 Now connect your Trezor One or other signing device to your local machine
 
-Head back to Embassy Specter
+Head back to Specter on your Embassy
 
 Click "Save Changes"
 
 Then "Test connection"
 
-You should see this along the top of the screen
+You should see this along the top of the screen:
 
 You can now click "Add new device"
 
-Select the type of signing device you're using.
+Select the type of signing device you're using
 
 Name the device
 
 And click "Get via USB"
 
-Once populated, click "Continue"
+You may be asked for you PIN and passphrase here, and you may need to confirm extraction on the signing device
 
-You can now "Add new wallet"
+Specter will then begin extracting the public key(s) from your device
 
-Select "Single key wallet", you can select Multisignature wallet if you added more than one device and want to make a multisig wallet.
+You may not want all the default types of extended public key. Remove/keep the ones you want by clicking "edit"
 
-Select the device or devices that you want to use.
+Click "Continue"
 
-Name the wallet and select the key you want to use.
+You can now "Add new wallet" or "create single key wallet."
+
+(If you want to create a multisig wallet, add another device first, and make sure you generated an xpub intented for multisig on the first device, then come back to this step.)
+
+Select the device (or devices if you are making a multisig wallet) that you want to use.
+
+Name the wallet and select the key(s) you want to use.
 
 Select "Scan for existing funds" if you have already used this wallet and wish to establish the transaction history, if this is a brand new wallet this is not necessary.
+
+Click continue
 
 If you select "rescan" you can refresh the page and watch as your bitcoin node rescans the blockchain for your wallet's history.
 
@@ -58,9 +70,9 @@ This part of the guide will go over how to upload an xpub from a device that per
 
 Power up the Coldcard, enter your pin and any passphrase necessary.
 
-Go down to "Advanced" sd card something something
+Go down to "Advanced", "MicroSD card", "Export Wallet", "Generic JSON"
 
-Insert the SD card into your *local* machine (not the Embassy)
+Remove the SD card from your Coldcard and insert it into your *local* machine (not the Embassy)
 
 Go back to Specter on your Embassy and click "Add new device"
 
@@ -68,18 +80,22 @@ Click Coldcard (or whatever signing device you are using that permits airgapping
 
 Name the device
 
-Click "Upload from SD card", navitage to FILE.SOMETHING and click OPEN?!
+Click "Upload from SD card", navitage to the SD card and select "coldcard-export.json" and click open
 
-Once populated, click "Continue"
+You may not want all the default types of extended public key. Remove/keep the ones you want by clicking "edit"
 
-You can now "Add new wallet"
+Click "Continue"
 
-Select "Single key wallet", you can select Multisignature wallet if you added more than one device and want to make a multisig wallet.
+You can now "Add new wallet" or "create single key wallet."
 
-Select the device or devices that you want to use.
+(If you want to create a multisig wallet, add another device first, and make sure you generated an xpub intented for multisig on the first device, then come back to this step.)
+
+Select the device (or devices if you are making a multisig wallet) that you want to use.
 
 Name the wallet and select the key you want to use.
 
 Select "Scan for existing funds" if you have already used this wallet and wish to establish the transaction history, if this is a brand new wallet this is not necessary.
+
+Click continue
 
 If you select "rescan" you can refresh the page and watch as your bitcoin node rescans the blockchain for your wallet's history.
