@@ -92,9 +92,15 @@ And click "Get via USB"
 
 <!-- MD_PACKER_INLINE END -->
 
-You may be asked for you PIN and passphrase here, and you may need to confirm extraction on the signing device
+You may be asked for your PIN and passphrase here, and you may need to confirm extraction on the signing device
 
 Specter will then begin extracting the public key(s) from your device
+
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-10.png)
+
+<!-- MD_PACKER_INLINE END -->
 
 You may not want all the default types of extended public key. Remove/keep the ones you want by clicking "edit"
 
@@ -107,6 +113,12 @@ You can now "Add new wallet" or "create single key wallet."
 Select the device (or devices if you are making a multisig wallet) that you want to use.
 
 Name the wallet and select the key(s) you want to use.
+
+<!-- MD_PACKER_INLINE BEGIN -->
+
+![](./docs/assets/img-11.png)
+
+<!-- MD_PACKER_INLINE END -->
 
 Select "Scan for existing funds" if you have already used this wallet and wish to establish the transaction history, if this is a brand new wallet this is not necessary.
 
