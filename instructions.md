@@ -1,8 +1,8 @@
 # Usage Instructions
 
-There are two ways to add a wallet to Specter. Some signing devices permit "air gap" which means transferring the xpub (and subsequent unsigned/signed transactions back and forth between Specter and the signing device via an SD card (Coldcard for example) - other devices require a direct USB connection between the device and Specter (Trezor One for example).
+There are two ways to add a wallet to Specter. Some signing devices permit "air gap" which means transferring the xpub (and subsequent unsigned/signed transactions) back and forth between Specter and the signing device via an SD card (Coldcard for example) - other devices require a direct USB connection between the device and Specter (Trezor One for example).
 
-Non airgapped method:
+## USB Connected Signing Devices:
 
 For devices like the Trezor One, air gapping is not possible. This means importing xpubs via USB - Specter permits this via the HWI which requires running another instance of Specter on your *local* machine (not your Embassy).
 
@@ -52,7 +52,7 @@ Select "Scan for existing funds" if you have already used this wallet and wish t
 
 If you select "rescan" you can refresh the page and watch as your bitcoin node rescans the blockchain for your wallet's history.
 
-*Air Gapped Signing Devices*
+## Air Gapped Signing Devices
 
 This part of the guide will go over how to upload an xpub from a device that permits air gapping - in this case a Coldcard.
 
