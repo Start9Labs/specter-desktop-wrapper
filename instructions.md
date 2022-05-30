@@ -6,11 +6,9 @@ There are two ways to add a wallet to Specter. Some signing devices permit "air 
 
 For devices like the Trezor One, air gapping is not possible. This means importing xpubs via USB - Specter permits this via the HWI which requires running a second instance of Specter on your *local* machine (i.e *not* your Embassy).
 
-For this to work, your Embassy and your local machine must be on the same LAN.
-
 Start by heading to Specter running on your Embassy (you can use either Tor or LAN - if you are accessing your Embassy over LAN the Launch UI button will open up the LAN interface for Specter - if you're accessing over Tor it will open up the Tor interface).
 
-Clicking on the cog in the top right, or clicking on "Update your settings"
+Click on the cog in the top right, or "Update your settings"
 
 Click "USB devices"
 
