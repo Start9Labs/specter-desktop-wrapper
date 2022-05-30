@@ -12,7 +12,7 @@ Click on the cog in the top right, or "Update your settings"
 
 <!-- MD_PACKER_INLINE BEGIN -->
 
-![](./assets/img-1.png
+![](./docs/assets/img-1.png
 
 <!-- MD_PACKER_INLINE END -->
 
