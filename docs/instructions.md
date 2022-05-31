@@ -213,3 +213,4 @@ Click "Create wallet"
 <!-- MD_PACKER_INLINE END -->
 
 If you selected "rescan" you can refresh the page and watch as your bitcoin node rescans the blockchain for your wallet's history.
+=======
