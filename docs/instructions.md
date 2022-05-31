@@ -1,3 +1,0 @@
-
-## Welcome to Specter Desktop!
-
