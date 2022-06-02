@@ -64,7 +64,7 @@ Clone the project locally. Note the submodule link to the original project(s).
 
 ```
 git clone https://github.com/Start9Labs/specter-wrapper.git
-cd specter--wrapper
+cd specter-wrapper
 git submodule update --init --recursive
 ```
 ## Building
