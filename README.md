@@ -1,4 +1,4 @@
-# Wrapper for Specter Desktop
+# Wrapper for Specter
 
 `Specter` is a GUI for Bitcoin Core optimised to work with hardware wallets . This .s9pk wrapper will allow you to run Specter on your Embassy.
 
