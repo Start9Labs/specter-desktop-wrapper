@@ -1,16 +1,16 @@
-id: specter-desktop 
-title: Specter Desktop
+id: specter 
+title: Specter
 version: 1.9.4.1
 release-notes: Initial version for EmbassyOS v0.3.0.3
 license: mit
-wrapper-repo: https://github.com/cryptodread/specter-desktop-wrapper
+wrapper-repo: https://github.com/Start9Labs/specter-wrapper
 upstream-repo: https://github.com/cryptoadvance/specter-desktop
 support-site: https://github.com/cryptoadvance/specter-desktop/issues
 marketing-site: https://specter.solutions
 build: ["make"]
 description:
-  short: A desktop GUI for Bitcoin Core optimised to work with hardware wallets 
-  long: A desktop GUI for Bitcoin Core optimised to work with hardware wallets. This software might be ready to be used but at your own risk. 
+  short: A GUI for Bitcoin Core optimised to work with hardware wallets 
+  long: A GUI for Bitcoin Core optimised to work with hardware wallets. This software might be ready to be used but at your own risk. 
 assets:
   license: LICENSE
   icon: icon.png
@@ -29,7 +29,7 @@ main:
 health-checks:
   main:
     name: Web Interface
-    success-message: The Specter Desktop UI is ready to visit in a web browser
+    success-message: The Specter UI is ready to visit in a web browser
     type: docker
     image: main
     entrypoint: check-web.sh
@@ -59,7 +59,7 @@ config:
     args:
       - config
       - set
-      - specter-desktop
+      - specter
       - /root
       - /mnt/assets/config_rules.yaml
 #      - /mnt/assets/dependencies.yaml
@@ -93,8 +93,8 @@ volumes:
     readonly: false
 interfaces:
   main:
-    name: Specter Desktop Web Interface
-    description: Specifies the Specter Desktop interface to listen on for HTTP connections.
+    name: Specter Web Interface
+    description: Specifies the Specter interface to listen on for HTTP connections.
     tor-config:
       port-mapping:
         80: "25441"
@@ -122,7 +122,7 @@ dependencies:
         args:
           - dependency
           - check
-          - specter-desktop
+          - specter
           - "btc-rpc-proxy"
           - /root
           - "/mnt/assets/btc-rpc-proxy_config_rules.yaml"
@@ -138,7 +138,7 @@ dependencies:
         args:
           - dependency
           - "auto-configure"
-          - specter-desktop
+          - specter
           - "btc-rpc-proxy"
           - /root
           - "/mnt/assets/btc-rpc-proxy_config_rules.yaml"
@@ -161,7 +161,7 @@ dependencies:
         args:
           - dependency
           - check
-          - "specter-desktop"
+          - "specter"
           - bitcoind
           - /root
           - "/mnt/assets/bitcoind_config_rules.yaml"
@@ -177,7 +177,7 @@ dependencies:
         args:
           - dependency
           - "auto-configure"
-          - "specter-desktop"
+          - "specter"
           - bitcoind
           - /root
           - "/mnt/assets/bitcoind_config_rules.yaml"
