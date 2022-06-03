@@ -88,6 +88,6 @@ embassy-cli package install /path/to/specter.s9pk
 ```
 ## Verify Install
 
-Go to your Embassy Services page, select specter and start the service.
+Go to your Embassy Services page, select Specter and start the service.
 
 #Done
