@@ -330,3 +330,9 @@
     - PUSH:
         to: 'users.[first(item => ''item.name = "specter")].allowed-calls'
         value: "utxoupdatepsbt"
+- rule: '''users.[first(item => ''item.name = "specter-desktop")].allowed-calls.* = "importmulti"'
+  description: 'RPC user "specter-desktop" must have "importmulti" enabled'
+  suggestions:
+    - PUSH:
+        to: 'users.[first(item => ''item.name = "specter-desktop")].allowed-calls'
+        value: "importmulti"
