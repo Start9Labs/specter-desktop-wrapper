@@ -10,9 +10,15 @@
     - SET:
         var: "advanced.blockfilters.blockfilterindex"
         to-value: true
-- rule: "!(#rpc.advanced.threads < 2)"
-  description: "Must be >= 2"
+- rule: "!(#rpc.advanced.threads < 4)"
+  description: "Must be >= 4"
   suggestions:
     - SET:
         var: "rpc.advanced.threads"
-        to-value: 2
+        to-value: 4
+- rule: "!(#rpc.advanced.workqueue < 128)"
+  description: "Must be >= 128"
+  suggestions:
+    - SET:
+        var: "rpc.advanced.workqueue"
+        to-value: 128
