@@ -330,3 +330,15 @@
     - PUSH:
         to: 'users.[first(item => ''item.name = "specter")].allowed-calls'
         value: "utxoupdatepsbt"
+- rule: '''users.[first(item => ''item.name = "specter")].allowed-calls.* = "importmulti"'
+  description: 'RPC user "specter" must have "importmulti" enabled'
+  suggestions:
+    - PUSH:
+        to: 'users.[first(item => ''item.name = "specter")].allowed-calls'
+        value: "importmulti"
+- rule: '''users.[first(item => ''item.name = "specter")].allowed-calls.* = "getaddressesbylabel"'
+  description: 'RPC user "specter" must have "getaddressesbylabel" enabled'
+  suggestions:
+    - PUSH:
+        to: 'users.[first(item => ''item.name = "specter")].allowed-calls'
+        value: "getaddressesbylabel"
