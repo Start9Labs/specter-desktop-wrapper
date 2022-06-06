@@ -147,7 +147,7 @@ dependencies:
           compat: /mnt/assets
         io-format: yaml
   bitcoind:
-    version: ">=0.22.0.0 <=23.0.0"
+    version: ">=23.0.0 <24.0.0"
     requirement:
       type: "required"
       how: Can alternatively configure proxy or bitcoin core node.
