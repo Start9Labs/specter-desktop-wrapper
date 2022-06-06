@@ -1,6 +1,6 @@
 id: specter 
 title: Specter
-version: 1.9.4.1
+version: 1.9.4
 release-notes: Initial version for EmbassyOS v0.3.0.3
 license: mit
 wrapper-repo: https://github.com/Start9Labs/specter-wrapper
