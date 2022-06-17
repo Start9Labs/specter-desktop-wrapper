@@ -3,7 +3,6 @@ ASSETS := $(shell yq e '.assets.[].src' manifest.yaml)
 ASSET_PATHS := $(addprefix assets/,$(ASSETS))
 VERSION := $(shell yq e ".version" manifest.yaml)
 S9PK_PATH=$(shell find . -name specter.s9pk -print)
-PWD=$(shell pwd)
 
 # delete the target of a rule if it has changed and its recipe exits with a nonzero exit status
 .DELETE_ON_ERROR:
