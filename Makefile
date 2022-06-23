@@ -16,7 +16,7 @@ clean:
 	rm -f image.tar
 	rm -f specter.s9pk
 
-specter.s9pk: manifest.yaml assets/compat/* image.tar icon.png instructions.md $(ASSET_PATHS)
+specter.s9pk: manifest.yaml assets/compat/* image.tar icon.png instructions.md scripts/embassy.js $(ASSET_PATHS)
 	embassy-sdk pack
 
 instructions.md: docs/instructions.md $(DOC_ASSETS)
@@ -24,3 +24,6 @@ instructions.md: docs/instructions.md $(DOC_ASSETS)
 
 image.tar: Dockerfile docker_entrypoint.sh assets/utils/*
 	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/specter/main:$(VERSION) --platform=linux/arm64/v8 -o type=docker,dest=image.tar -f ./Dockerfile .
+
+scripts/embassy.js: scripts/**/*.ts
+	deno bundle scripts/embassy.ts scripts/embassy.js
