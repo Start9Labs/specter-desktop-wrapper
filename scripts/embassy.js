@@ -4020,19 +4020,151 @@ const setConfig = async (effects, newConfig)=>{
     };
 };
 const { shape: shape1 , arrayOf: arrayOf1 , string: string1 , boolean: __boolean1  } = matches;
-const matchBitcoindConfig = shape1({
+shape1({
     rpc: shape1({
         enable: __boolean1
     })
 });
+const matchProxyConfig = shape1({
+    users: arrayOf1(shape1({
+        name: string1,
+        "allowed-calls": arrayOf1(string1),
+        password: string1,
+        "fetch-blocks": __boolean1
+    }, [
+        "fetch-blocks"
+    ]))
+});
+function times(fn, amount) {
+    const answer = new Array(amount);
+    for(let i = 0; i < amount; i++){
+        answer[i] = fn(i);
+    }
+    return answer;
+}
+function randomItemString(input) {
+    return input[Math.floor(Math.random() * input.length)];
+}
+const serviceName = "specter";
+const fullChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+const checks = [
+    {
+        currentError (config) {
+            if (!matchProxyConfig.test(config)) {
+                return "Config is not the correct shape";
+            }
+            if (config.users.some((x)=>x.name === serviceName)) {
+                return;
+            }
+            return `Must have an RPC user named "${serviceName}"`;
+        },
+        fix (config) {
+            config.users.push({
+                name: serviceName,
+                "allowed-calls": [],
+                password: times(()=>randomItemString(fullChars), 22).join("")
+            });
+        }
+    },
+    ...[
+        "getindexinfo",
+        "getblockcount",
+        "getchaintips",
+        "getmempoolinfo",
+        "getblockchaininfo",
+        "getblockhash",
+        "getblock",
+        "getmempoolentry",
+        "getrawtransaction",
+        "getrawmempool",
+        "gettxout",
+        "validateaddress",
+        "estimatesmartfee",
+        "getbestblockhash",
+        "getblockheader",
+        "getinfo",
+        "getmempoolinfo",
+        "getnetworkinfo",
+        "getpeerinfo",
+        "getrawtransaction",
+        "sendrawtransaction",
+        "uptime",
+        "scantxoutset",
+        "listwallets",
+        "getblockfilter",
+        "listwalletdir",
+        "createwallet",
+        "gettxoutsetinfo",
+        "importdescriptors",
+        "listlabels",
+        "getwalletinfo",
+        "listtransactions",
+        "getbalances",
+        "listlockunspent",
+        "getreceivedbyaddress",
+        "listsinceblock",
+        "rescanblockchain",
+        "loadwallet",
+        "gettransaction",
+        "walletprocesspsbt",
+        "setlabel",
+        "walletcreatefundedpsbt",
+        "listunspent",
+        "getmininginfo",
+        "abortrescan",
+        "unloadwallet",
+        "combinepsbt",
+        "finalizepsbt",
+        "testmempoolaccept",
+        "lockunspent",
+        "gettxoutproof",
+        "converttopsbt",
+        "utxoupdatepsbt",
+        "importmulti",
+        "getaddressesbylabel", 
+    ].map((operator)=>({
+            currentError (config) {
+                if (!matchProxyConfig.test(config)) {
+                    return "Config is not the correct shape";
+                }
+                if (config.users.find((x)=>x.name === serviceName)?.["allowed-calls"]?.some((x)=>x === operator) ?? false) {
+                    return;
+                }
+                return `RPC user "c-lightning" must have "${operator}" enabled`;
+            },
+            fix (config) {
+                if (!matchProxyConfig.test(config)) {
+                    throw new Error("Config is not the correct shape");
+                }
+                const found = config.users.find((x)=>x.name === serviceName);
+                if (!found) {
+                    throw new Error("Users for c-lightning should exist");
+                }
+                found["allowed-calls"] = [
+                    ...found["allowed-calls"] ?? [],
+                    operator
+                ];
+            }
+        })), 
+];
 const dependencies = {
     bitcoind: {
         async check (effects, configInput) {
             effects.info("check bitcoind");
-            const config = matchBitcoindConfig.unsafeCast(configInput);
+            const config = configInput;
             if (!config.rpc.enable) {
                 return {
-                    error: 'Must have RPC enabled'
+                    error: "Must have RPC enabled"
+                };
+            }
+            if (!config.advanced.blockfilters.blockfilterindex) {
+                return {
+                    error: "Must have block filter index enabled for Run The Numbers to work"
+                };
+            }
+            if (config.rpc.advanced.threads < 4) {
+                return {
+                    error: "Must be greater than or equal to 4"
                 };
             }
             return {
@@ -4041,10 +4173,43 @@ const dependencies = {
         },
         async autoConfigure (effects, configInput) {
             effects.info("autoconfigure bitcoind");
-            const config = matchBitcoindConfig.unsafeCast(configInput);
+            const config = configInput;
             config.rpc.enable = true;
+            config.advanced.blockfilters.blockfilterindex = true;
+            if (config.rpc.advanced.threads < 4) {
+                config.rpc.advanced.threads = 4;
+            }
             return {
                 result: config
+            };
+        }
+    },
+    "btc-rpc-proxy": {
+        async check (effects, configInput) {
+            effects.info("check btc-rpc-proxy");
+            for (const checker of checks){
+                const error = checker.currentError(configInput);
+                if (error) {
+                    effects.error(`throwing error: ${error}`);
+                    return {
+                        error
+                    };
+                }
+            }
+            return {
+                result: null
+            };
+        },
+        async autoConfigure (effects, configInput) {
+            effects.info("autoconfigure btc-rpc-proxy");
+            for (const checker of checks){
+                const error = checker.currentError(configInput);
+                if (error) {
+                    checker.fix(configInput);
+                }
+            }
+            return {
+                result: configInput
             };
         }
     }
@@ -4109,7 +4274,7 @@ const getConfig = async (effects)=>{
                         "package-id": "btc-rpc-proxy",
                         "target": "config",
                         "multi": false,
-                        "selector": "$.users.[?(@.name == \"specter\")].name"
+                        "selector": '$.users.[?(@.name == "specter")].name'
                     },
                     "password": {
                         "type": "pointer",
@@ -4119,7 +4284,7 @@ const getConfig = async (effects)=>{
                         "package-id": "btc-rpc-proxy",
                         "target": "config",
                         "multi": false,
-                        "selector": "$.users.[?(@.name == \"specter\")].password"
+                        "selector": '$.users.[?(@.name == "specter")].password'
                     }
                 }
             }

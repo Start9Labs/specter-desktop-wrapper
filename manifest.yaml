@@ -129,37 +129,9 @@ dependencies:
     description: Used to subscribe to new block events from a full archival node.
     config:
       check: 
-        type: docker
-        image: compat
-        system: true
-        entrypoint: compat
-        args:
-          - dependency
-          - check
-          - "specter"
-          - bitcoind
-          - /root
-          - "/mnt/assets/bitcoind_config_rules.yaml"
-        mounts:
-          compat: /mnt/assets
-          main: /root
-        io-format: yaml
+        type: script
       auto-configure:
-        type: docker
-        image: compat
-        system: true
-        entrypoint: compat
-        args:
-          - dependency
-          - "auto-configure"
-          - "specter"
-          - bitcoind
-          - /root
-          - "/mnt/assets/bitcoind_config_rules.yaml"
-        mounts:
-          compat: /mnt/assets
-          main: /root
-        io-format: yaml
+        type: script
 backup:
   create:
     type: docker
