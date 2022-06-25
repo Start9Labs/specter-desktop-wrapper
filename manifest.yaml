@@ -37,6 +37,17 @@ health-checks:
     args: []
     io-format: json
     inject: true
+#  synced:
+#    name: Bitcoin Synced
+#    success-message: Bitcoin is fully indexed.
+#    type: docker
+#    image: main
+#    system: false
+#    entrypoint: check-synced.sh
+#    args: ["sync"]
+#    mounts: {}
+#    io-format: json
+#    inject: true  
 config:
   get:
     type: script

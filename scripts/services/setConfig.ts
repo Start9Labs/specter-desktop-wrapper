@@ -28,3 +28,5 @@ export const setConfig: ExpectedExports.setConfig = async (
   };
   return { result };
 };
+
+// ? {bitcoind: ["synced"]} :
