@@ -18,14 +18,8 @@ else
 	echo "Running on Bitcoin Core..."
 fi
 echo "Starting Specter..."
-export BTC_RPC_PROTOCOL=$BTC_RPC_PROTOCOL
-export BTC_RPC_HOST=$BTC_RPC_HOST
-export BTC_RPC_USER=$BTC_RPC_USER
-export BTC_RPC_PASSWORD=$BTC_RPC_PASSWORD
 export BTC_RPC_PORT=8332
 
 
-python3 -m cryptoadvance.specter server --host specter.embassy
+exec python3 -m cryptoadvance.specter server --host specter.embassy
 
-trap _term SIGTERM
-wait -n $specter_process
