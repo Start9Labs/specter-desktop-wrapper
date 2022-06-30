@@ -1,4 +1,4 @@
-import { Config, ExpectedExports, matches } from "../deps.ts";
+import { types as T, matches } from "../deps.ts";
 
 const { shape, arrayOf, string, boolean } = matches;
 
@@ -39,8 +39,8 @@ const fullChars =
   "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 type Check = {
-  currentError(config: Config): string | void;
-  fix(config: Config): void;
+  currentError(config: T.Config): string | void;
+  fix(config: T.Config): void;
 };
 
 const checks: Array<Check> = [
@@ -55,6 +55,9 @@ const checks: Array<Check> = [
       return `Must have an RPC user named "${serviceName}"`;
     },
     fix(config) {
+      if (!matchProxyConfig.test(config)) {
+        return;
+      }
       config.users.push({
         name: serviceName,
         "allowed-calls": [],
@@ -146,8 +149,9 @@ const checks: Array<Check> = [
   ),
 ];
 
-export const dependencies: ExpectedExports.dependencies = {
+export const dependencies: T.ExpectedExports.dependencies = {
   bitcoind: {
+    // deno-lint-ignore require-await
     async check(effects, configInput) {
       effects.info("check bitcoind");
       const config = configInput as any; //matchBitcoindConfig.unsafeCast(configInput);
@@ -165,6 +169,7 @@ export const dependencies: ExpectedExports.dependencies = {
       }
       return { result: null };
     },
+    // deno-lint-ignore require-await
     async autoConfigure(effects, configInput) {
       effects.info("autoconfigure bitcoind");
       const config = configInput as any; //matchBitcoindConfig.unsafeCast(configInput);
@@ -177,6 +182,7 @@ export const dependencies: ExpectedExports.dependencies = {
     },
   },
   "btc-rpc-proxy": {
+    // deno-lint-ignore require-await
     async check(effects, configInput) {
       effects.info("check btc-rpc-proxy");
       for (const checker of checks) {
@@ -188,6 +194,7 @@ export const dependencies: ExpectedExports.dependencies = {
       }
       return { result: null };
     },
+    // deno-lint-ignore require-await
     async autoConfigure(effects, configInput) {
       effects.info("autoconfigure btc-rpc-proxy");
       for (const checker of checks) {
