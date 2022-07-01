@@ -26,7 +26,6 @@ main:
     compat: /mnt/assets
     main: /root
     bitcoind: /mnt/bitcoind
-  io-format: yaml
 health-checks:
   main:
     name: Web Interface
