@@ -10,10 +10,10 @@ export const getConfig: types.ExpectedExports.getConfig = compat.getConfig({
       "id": "type",
       "name": "Type",
       "description":
-        "- Internal: The Bitcoin Core service installed to your Embassy\n- Internal Proxy: The Bitcoin Proxy service installed on your Embassy\n",
+        "- Bitcoin Core: The Bitcoin Core service installed to your Embassy\n- Bitcoin Proxy: The Bitcoin Proxy service installed on your Embassy\n",
       "variant-names": {
-        "internal": "Internal",
-        "internal-proxy": "Internal (Bitcoin Proxy)",
+        "internal": "Bitcoin Core",
+        "internal-proxy": "Bitcoin Proxy",
       },
     },
     "default": "internal-proxy",
