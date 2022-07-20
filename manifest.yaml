@@ -1,6 +1,6 @@
 id: specter 
 title: Specter
-version: 1.10.3
+version: 1.10.3.1
 release-notes: Initial version for EmbassyOS v0.3.1
 eos-version: 0.3.1
 license: mit
@@ -100,37 +100,9 @@ dependencies:
     description: Used for RPC permissioning.
     config:
       check:
-        type: docker
-        image: compat
-        system: true
-        entrypoint: compat
-        args:
-          - dependency
-          - check
-          - specter
-          - "btc-rpc-proxy"
-          - /root
-          - "/mnt/assets/btc-rpc-proxy_config_rules.yaml"
-        mounts:
-          main: /root
-          compat: /mnt/assets
-        io-format: yaml
+        type: script
       auto-configure:
-        type: docker
-        image: compat
-        system: true
-        entrypoint: compat
-        args:
-          - dependency
-          - "auto-configure"
-          - specter
-          - "btc-rpc-proxy"
-          - /root
-          - "/mnt/assets/btc-rpc-proxy_config_rules.yaml"
-        mounts:
-          main: /root
-          compat: /mnt/assets
-        io-format: yaml
+        type: script
   bitcoind:
     version: ">=23.0.0 <24.0.0"
     requirement:
