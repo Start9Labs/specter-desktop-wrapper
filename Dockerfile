@@ -1,17 +1,13 @@
 ARG USER=specter
 ARG DIR=/data/
 ARG VERSION=v1.10.3
-ARG REPO=https://github.com/cryptoadvance/specter-desktop
 FROM python:3.9-slim-bullseye AS builder
 RUN apt update && apt install -y git build-essential libusb-1.0-0-dev libudev-dev libffi-dev libssl-dev
 ARG VERSION
 ARG REPO
-WORKDIR /
-RUN git clone $REPO 
-WORKDIR /specter-desktop
-#RUN git pull
-#COPY specter-desktop/ .
-RUN git checkout $VERSION
+#WORKDIR /
+WORKDIR /build
+COPY specter-desktop/ .
 RUN sed -i "s/vx.y.z-get-replaced-by-release-script/${VERSION}/g; " setup.py
 RUN pip3 install --upgrade pip
 RUN pip3 install babel cryptography
