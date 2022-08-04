@@ -6,6 +6,11 @@ const matchBitcoindConfig = shape({
   rpc: shape({
     enable: boolean,
   }),
+  advanced: shape({
+    pruning: shape({
+      mode: string,
+    }),
+  }),
 });
 
 const matchProxyConfig = shape({
@@ -158,6 +163,9 @@ export const dependencies: T.ExpectedExports.dependencies = {
       if (!config.rpc.enable) {
         return { error: "Must have RPC enabled" };
       }
+      if (config.advanced.pruning.mode !== "disabled") {
+        return { error: "Pruning must be disabled (must be an archival node)" };
+      }
       if (!config.advanced.blockfilters.blockfilterindex) {
         return {
           error:
@@ -177,6 +185,9 @@ export const dependencies: T.ExpectedExports.dependencies = {
       config.advanced.blockfilters.blockfilterindex = true;
       if (config.rpc.advanced.threads < 4) {
         config.rpc.advanced.threads = 4;
+      }
+      if (config.advanced.pruning.mode !== "disabled") {
+        config.advanced.pruning.mode = "disabled";
       }
       return { result: config };
     },
