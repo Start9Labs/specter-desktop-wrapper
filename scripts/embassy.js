@@ -778,12 +778,11 @@ const isShape = (testShape)=>{
 function shape(testShape, optionals, optionalAndDefaults) {
     if (optionals) {
         const defaults = optionalAndDefaults || {};
-        console.log("test");
         const entries = Object.entries(testShape);
         const optionalSet = new Set(Array.from(optionals));
         return every(partial(Object.fromEntries(entries.filter(([key, _])=>optionalSet.has(key)).map(([key, parser])=>[
                 key,
-                parser
+                parser.optional()
             ]))), isShape(Object.fromEntries(entries.filter(([key, _])=>!optionalSet.has(key))))).map((ret)=>{
             for (const key of optionalSet){
                 const keyAny = key;
@@ -951,6 +950,58 @@ const matches = Object.assign(function matchesFn(value) {
     recursive,
     deferred
 });
+const mod = {
+    AnyParser: AnyParser,
+    ArrayParser: ArrayParser,
+    BoolParser: BoolParser,
+    FunctionParser: FunctionParser,
+    GuardParser: GuardParser,
+    NilParser: NilParser,
+    NumberParser: NumberParser,
+    ObjectParser: ObjectParser,
+    OrParsers: OrParsers,
+    ShapeParser: ShapeParser,
+    StringParser: StringParser,
+    saferStringify: saferStringify,
+    NamedParser: NamedParser,
+    ArrayOfParser: ArrayOfParser,
+    LiteralsParser: LiteralsParser,
+    ConcatParsers: ConcatParsers,
+    MappedAParser: MappedAParser,
+    default: matches,
+    Validator: Parser,
+    matches,
+    allOf: every,
+    any,
+    anyOf: some,
+    array: isArray,
+    arrayOf,
+    boolean: __boolean,
+    deferred,
+    dictionary,
+    every,
+    guard,
+    instanceOf,
+    isFunction,
+    literal,
+    literals,
+    natural,
+    nill: isNill,
+    number,
+    object,
+    oneOf: some,
+    Parse: Parser,
+    Parser,
+    parserName,
+    partial,
+    recursive,
+    regex,
+    shape,
+    some,
+    string,
+    tuple,
+    unknown
+};
 class YAMLError extends Error {
     constructor(message = "(unknown reason)", mark = ""){
         super(`${message} ${mark}`);
@@ -3989,7 +4040,7 @@ function dump(input, options) {
 function stringify(obj, options) {
     return dump(obj, options);
 }
-const mod = {
+const mod1 = {
     parse: parse,
     parseAll: parseAll,
     stringify: stringify,
@@ -4000,26 +4051,82 @@ const mod = {
     FAILSAFE_SCHEMA: failsafe,
     JSON_SCHEMA: json
 };
-const { number: number1  } = matches;
-const setConfig = async (effects, newConfig)=>{
+const exists = (effects, props)=>effects.metadata(props).then((_)=>true, (_)=>false);
+const asResult = (result)=>({
+        result: result
+    });
+const noPropertiesFound = {
+    result: {
+        version: 2,
+        data: {
+            "Not Ready": {
+                type: "string",
+                value: "Could not find properties. The service might still be starting",
+                qr: false,
+                copyable: false,
+                masked: false,
+                description: "Fallback Message When Properties could not be found"
+            }
+        }
+    }
+};
+const properties = async (effects)=>{
+    if (await exists(effects, {
+        path: "start9/stats.yaml",
+        volumeId: "main"
+    }) === false) {
+        return noPropertiesFound;
+    }
+    return await effects.readFile({
+        path: "start9/stats.yaml",
+        volumeId: "main"
+    }).then(mod1.parse).then(asResult);
+};
+const setConfig = async (effects, newConfig, dependsOn = {})=>{
     await effects.createDir({
         path: "start9",
         volumeId: "main"
     });
     await effects.writeFile({
         path: "start9/config.yaml",
-        toWrite: mod.stringify(newConfig),
+        toWrite: mod1.stringify(newConfig),
         volumeId: "main"
     });
     const result = {
         signal: "SIGTERM",
-        "depends-on": {}
+        "depends-on": dependsOn
     };
     return {
         result
     };
 };
-const { shape: shape1 , arrayOf: arrayOf1 , string: string1 , boolean: __boolean1  } = matches;
+const { any: any1 , string: string1 , dictionary: dictionary1  } = mod;
+const matchConfig = dictionary1([
+    string1,
+    any1
+]);
+const getConfig = (spec)=>async (effects)=>{
+        const config = await effects.readFile({
+            path: "start9/config.yaml",
+            volumeId: "main"
+        }).then((x)=>mod1.parse(x)).then((x)=>matchConfig.unsafeCast(x)).catch((e)=>{
+            effects.info(`Got error ${e} while trying to read the config`);
+            return undefined;
+        });
+        return {
+            result: {
+                config,
+                spec
+            }
+        };
+    };
+const mod2 = {
+    properties: properties,
+    setConfig: setConfig,
+    getConfig: getConfig
+};
+const setConfig1 = mod2.setConfig;
+const { shape: shape1 , arrayOf: arrayOf1 , string: string2 , boolean: __boolean1  } = mod;
 shape1({
     rpc: shape1({
         enable: __boolean1
@@ -4027,9 +4134,9 @@ shape1({
 });
 const matchProxyConfig = shape1({
     users: arrayOf1(shape1({
-        name: string1,
-        "allowed-calls": arrayOf1(string1),
-        password: string1,
+        name: string2,
+        "allowed-calls": arrayOf1(string2),
+        password: string2,
         "fetch-blocks": __boolean1
     }, [
         "fetch-blocks"
@@ -4059,6 +4166,9 @@ const checks = [
             return `Must have an RPC user named "${serviceName}"`;
         },
         fix (config) {
+            if (!matchProxyConfig.test(config)) {
+                return;
+            }
             config.users.push({
                 name: serviceName,
                 "allowed-calls": [],
@@ -4214,89 +4324,69 @@ const dependencies = {
         }
     }
 };
-const { any: any1 , string: string2 , dictionary: dictionary1  } = matches;
-const matchConfig = dictionary1([
-    string2,
-    any1
-]);
-const getConfig = async (effects)=>{
-    const config = await effects.readFile({
-        path: "start9/config.yaml",
-        volumeId: "main"
-    }).then((x)=>mod.parse(x)).then((x)=>matchConfig.unsafeCast(x)).catch((e)=>{
-        effects.warn(`Got error ${e} while trying to read the config`);
-        return undefined;
-    });
-    const spec = {
-        "bitcoind": {
-            "type": "union",
-            "name": "Bitcoin Core",
-            "description": "The Bitcoin Core node for Specter to connect to",
-            "tag": {
-                "id": "type",
-                "name": "Type",
-                "description": "- Bitcoin: The Bitcoin Core service installed to your Embassy\n- Bitcoin Proxy: The Bitcoin Proxy service installed on your Embassy\n",
-                "variant-names": {
-                    "internal": "Bitcoin",
-                    "internal-proxy": "Bitcoin Proxy"
+const getConfig1 = mod2.getConfig({
+    "bitcoind": {
+        "type": "union",
+        "name": "Bitcoin Core",
+        "description": "The Bitcoin Core node for Specter to connect to",
+        "tag": {
+            "id": "type",
+            "name": "Type",
+            "description": "- Bitcoin Core: The Bitcoin Core service installed to your Embassy\n- Bitcoin Proxy: The Bitcoin Proxy service installed on your Embassy\n",
+            "variant-names": {
+                "internal": "Bitcoin Core",
+                "internal-proxy": "Bitcoin Proxy"
+            }
+        },
+        "default": "internal-proxy",
+        "variants": {
+            "internal": {
+                "user": {
+                    "type": "pointer",
+                    "name": "RPC Username",
+                    "description": "The username for the RPC user for Bitcoin Core",
+                    "subtype": "package",
+                    "package-id": "bitcoind",
+                    "target": "config",
+                    "selector": "$.rpc.username",
+                    "multi": false
+                },
+                "password": {
+                    "type": "pointer",
+                    "name": "RPC Password",
+                    "description": "The password for the RPC user for Bitcoin Core",
+                    "subtype": "package",
+                    "package-id": "bitcoind",
+                    "target": "config",
+                    "selector": "$.rpc.password",
+                    "multi": false
                 }
             },
-            "default": "internal-proxy",
-            "variants": {
-                "internal": {
-                    "user": {
-                        "type": "pointer",
-                        "name": "RPC Username",
-                        "description": "The username for the RPC user for Bitcoin Core",
-                        "subtype": "package",
-                        "package-id": "bitcoind",
-                        "target": "config",
-                        "selector": "$.rpc.username",
-                        "multi": false
-                    },
-                    "password": {
-                        "type": "pointer",
-                        "name": "RPC Password",
-                        "description": "The password for the RPC user for Bitcoin Core",
-                        "subtype": "package",
-                        "package-id": "bitcoind",
-                        "target": "config",
-                        "selector": "$.rpc.password",
-                        "multi": false
-                    }
+            "internal-proxy": {
+                "user": {
+                    "type": "pointer",
+                    "name": "RPC Username",
+                    "description": "The username for the RPC user allocated to Specter",
+                    "subtype": "package",
+                    "package-id": "btc-rpc-proxy",
+                    "target": "config",
+                    "multi": false,
+                    "selector": '$.users.[?(@.name == "specter")].name'
                 },
-                "internal-proxy": {
-                    "user": {
-                        "type": "pointer",
-                        "name": "RPC Username",
-                        "description": "The username for the RPC user allocated to Specter",
-                        "subtype": "package",
-                        "package-id": "btc-rpc-proxy",
-                        "target": "config",
-                        "multi": false,
-                        "selector": '$.users.[?(@.name == "specter")].name'
-                    },
-                    "password": {
-                        "type": "pointer",
-                        "name": "RPC Password",
-                        "description": "The password for the RPC user allocated to Specter",
-                        "subtype": "package",
-                        "package-id": "btc-rpc-proxy",
-                        "target": "config",
-                        "multi": false,
-                        "selector": '$.users.[?(@.name == "specter")].password'
-                    }
+                "password": {
+                    "type": "pointer",
+                    "name": "RPC Password",
+                    "description": "The password for the RPC user allocated to Specter",
+                    "subtype": "package",
+                    "package-id": "btc-rpc-proxy",
+                    "target": "config",
+                    "multi": false,
+                    "selector": '$.users.[?(@.name == "specter")].password'
                 }
             }
         }
-    };
-    return {
-        result: {
-            config,
-            spec
-        }
-    };
-};
-export { setConfig as setConfig };
+    }
+});
+export { setConfig1 as setConfig };
 export { dependencies as dependencies };
-export { getConfig as getConfig };
+export { getConfig1 as getConfig };
