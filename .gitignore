@@ -3,3 +3,5 @@ image.tar
 instructions.md
 scripts/embassy.js
 tofix.txt
+*/.DS_Store
+.DS_Store
