@@ -1,7 +1,9 @@
 id: specter 
 title: Specter
 version: 1.10.5
-release-notes: Initial version for EmbassyOS v0.3.1
+release-notes: |
+  - Update to version 1.10.5
+  - Bug fixes
 eos-version: 0.3.1
 license: mit
 wrapper-repo: https://github.com/Start9Labs/specter-wrapper
@@ -36,33 +38,11 @@ health-checks:
     args: []
     io-format: json
     inject: true
-#  synced:
-#    name: Bitcoin Synced
-#    success-message: Bitcoin is fully indexed.
-#    type: docker
-#    image: main
-#    system: false
-#    entrypoint: check-synced.sh
-#    args: ["sync"]
-#    mounts: {}
-#    io-format: json
-#    inject: true  
 config:
   get:
     type: script
   set:
     type: script
-#properties:
-#  type: docker
-#  image: compat
-#  system: true
-#  entrypoint: compat
-#  args:
-#    - properties
-#    - /root
-#  mounts:
-#    main: /root
-#  io-format: yaml
 volumes:
   main:
     type: data
