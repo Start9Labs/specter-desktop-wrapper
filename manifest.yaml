@@ -25,7 +25,6 @@ main:
   entrypoint: "docker_entrypoint.sh"
   args: []
   mounts:
-    compat: /mnt/assets
     main: /root
     bitcoind: /mnt/bitcoind
 health-checks:
@@ -46,8 +45,6 @@ config:
 volumes:
   main:
     type: data
-  compat:
-    type: assets
   utils:
     type: assets
   bitcoind:
