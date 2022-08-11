@@ -16,7 +16,7 @@ clean:
 	rm -f image.tar
 	rm -f specter.s9pk
 
-specter.s9pk: manifest.yaml assets/compat/* image.tar icon.png instructions.md scripts/embassy.js $(ASSET_PATHS)
+specter.s9pk: manifest.yaml image.tar icon.png instructions.md scripts/embassy.js $(ASSET_PATHS)
 	embassy-sdk pack
 
 instructions.md: docs/instructions.md $(DOC_ASSETS)

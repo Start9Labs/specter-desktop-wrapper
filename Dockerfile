@@ -1,10 +1,9 @@
 ARG USER=specter
 ARG DIR=/data/
-ARG VERSION=v1.10.3
+ARG VERSION=v1.10.5
 FROM python:3.9-slim-bullseye AS builder
 RUN apt update && apt install -y git build-essential libusb-1.0-0-dev libudev-dev libffi-dev libssl-dev
 ARG VERSION
-ARG REPO
 WORKDIR /build
 COPY specter-desktop/ .
 RUN sed -i "s/vx.y.z-get-replaced-by-release-script/${VERSION}/g; " setup.py
