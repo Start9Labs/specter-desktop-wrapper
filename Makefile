@@ -3,6 +3,7 @@ ASSETS := $(shell yq e '.assets.[].src' manifest.yaml)
 ASSET_PATHS := $(addprefix assets/,$(ASSETS))
 VERSION := $(shell yq e ".version" manifest.yaml)
 S9PK_PATH=$(shell find . -name specter.s9pk -print)
+TS_FILES := $(shell find . -name \*.ts )
 
 # delete the target of a rule if it has changed and its recipe exits with a nonzero exit status
 .DELETE_ON_ERROR:
@@ -15,6 +16,7 @@ verify: specter.s9pk $(S9PK_PATH)
 clean:
 	rm -f image.tar
 	rm -f specter.s9pk
+	rm -f /scripts/embassy.js
 
 specter.s9pk: manifest.yaml image.tar icon.png instructions.md scripts/embassy.js $(ASSET_PATHS)
 	embassy-sdk pack
@@ -25,5 +27,5 @@ instructions.md: docs/instructions.md $(DOC_ASSETS)
 image.tar: Dockerfile docker_entrypoint.sh assets/utils/*
 	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/specter/main:$(VERSION) --platform=linux/arm64/v8 -o type=docker,dest=image.tar -f ./Dockerfile .
 
-scripts/embassy.js: scripts/**/*.ts
+scripts/embassy.js: $(TS_FILES)
 	deno bundle scripts/embassy.ts scripts/embassy.js

@@ -117,3 +117,12 @@ backup:
     mounts:
       BACKUP: "/mnt/backup"
       main: "/root/data"
+migrations:
+  from:
+    "*":
+      type: script
+      args: ["from"]
+  to:
+    "*":
+      type: script
+      args: ["to"]
