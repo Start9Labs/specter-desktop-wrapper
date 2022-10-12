@@ -25,7 +25,7 @@ instructions.md: docs/instructions.md $(DOC_ASSETS)
 	cd docs && md-packer < instructions.md > ../instructions.md
 
 image.tar: Dockerfile docker_entrypoint.sh assets/utils/*
-	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/specter/main:$(VERSION) --platform=linux/arm64/v8 -o type=docker,dest=image.tar -f ./Dockerfile .
+	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/specter/main:$(VERSION) --platform=linux/amd64 -o type=docker,dest=image.tar -f ./Dockerfile .
 
 scripts/embassy.js: $(TS_FILES)
 	deno bundle scripts/embassy.ts scripts/embassy.js
