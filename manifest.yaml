@@ -1,7 +1,7 @@
 id: specter 
 title: Specter
 version: 1.10.5.1
-release-notes: Update to run on x86 architecture
+release-notes: Update to run on x86_64 architecture
 license: mit
 wrapper-repo: https://github.com/Start9Labs/specter-wrapper
 upstream-repo: https://github.com/cryptoadvance/specter-desktop
