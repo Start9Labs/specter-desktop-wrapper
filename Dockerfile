@@ -1,6 +1,6 @@
 ARG USER=specter
 ARG DIR=/data/
-ARG VERSION=v1.10.5
+ARG VERSION=v1.13.1
 
 FROM python:3.9-slim AS builder
 
