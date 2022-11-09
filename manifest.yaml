@@ -1,10 +1,9 @@
 id: specter 
 title: Specter
-version: 1.10.5
-release-notes: |
-  - Update to version 1.10.5
-  - Bug fixes
-eos-version: 0.3.1
+version: 1.13.1
+release-notes: | 
+  * Update to run on x86_64 architecture
+  * Update to v1.13.1, official release notes here: https://github.com/cryptoadvance/specter-desktop/tree/v1.13.1
 license: mit
 wrapper-repo: https://github.com/Start9Labs/specter-wrapper
 upstream-repo: https://github.com/cryptoadvance/specter-desktop
@@ -28,15 +27,10 @@ main:
     main: /root
     bitcoind: /mnt/bitcoind
 health-checks:
-  main:
-    name: Web Interface
-    success-message: The Specter UI is ready to visit in a web browser
-    type: docker
-    image: main
-    entrypoint: check-web.sh
-    args: []
-    io-format: json
-    inject: true
+  web-ui:
+    name: Web UI
+    success-message: Ready to be visited in a web browser
+    type: script
 config:
   get:
     type: script
@@ -45,8 +39,6 @@ config:
 volumes:
   main:
     type: data
-  utils:
-    type: assets
   bitcoind:
     type: pointer
     package-id: bitcoind
