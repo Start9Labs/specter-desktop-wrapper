@@ -72,7 +72,7 @@ dependencies:
       auto-configure:
         type: script
   bitcoind:
-    version: ">=23.0.0 <24.0.0"
+    version: ">=23.0.0 <26.0.0"
     requirement:
       type: "required"
     description: Used to subscribe to new block events from a full archival node.
