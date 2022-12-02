@@ -1,6 +1,6 @@
 id: specter 
 title: Specter
-version: 1.13.1
+version: 1.13.1.1
 release-notes: | 
   * Update to run on x86_64 architecture
   * Update to v1.13.1, official release notes here: https://github.com/cryptoadvance/specter-desktop/tree/v1.13.1
@@ -72,7 +72,7 @@ dependencies:
       auto-configure:
         type: script
   bitcoind:
-    version: ">=23.0.0 <24.0.0"
+    version: ">=23.0.0 <26.0.0"
     requirement:
       type: "required"
     description: Used to subscribe to new block events from a full archival node.
