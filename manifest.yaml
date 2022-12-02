@@ -1,6 +1,6 @@
 id: specter 
 title: Specter
-version: 1.13.1.1
+version: 1.13.1
 release-notes: | 
   * Update to run on x86_64 architecture
   * Update to v1.13.1, official release notes here: https://github.com/cryptoadvance/specter-desktop/tree/v1.13.1
