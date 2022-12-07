@@ -1,8 +1,9 @@
 id: specter 
 title: Specter
 version: 1.13.1
-release-notes: | 
+release-notes: |
   * Update to run on x86_64 architecture
+  * Use new eOS v0.3.3 JS APIs for main procedure and health checks
   * Update to v1.13.1, official release notes here: https://github.com/cryptoadvance/specter-desktop/tree/v1.13.1
   * Fix backup restore
 license: mit
@@ -18,14 +19,14 @@ assets:
   license: LICENSE
   icon: icon.png
   instructions: instructions.md
+containers:
+  main:
+    image: main
+    mounts:
+      main: /root
+      bitcoind: /mnt/bitcoind
 main:
-  type: docker
-  image: main
-  entrypoint: "docker_entrypoint.sh"
-  args: []
-  mounts:
-    main: /root
-    bitcoind: /mnt/bitcoind
+  type: script
 health-checks:
   web-ui:
     name: Web UI
