@@ -16,7 +16,7 @@ export const getConfig: types.ExpectedExports.getConfig = compat.getConfig({
         "internal-proxy": "Bitcoin Proxy",
       },
     },
-    "default": "internal-proxy",
+    "default": "internal",
     "variants": {
       "internal": {
         "user": {
