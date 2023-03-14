@@ -1,3 +1,3 @@
 import { Backups } from "../deps.ts";
 
-export const { createBackup, restoreBackup } = Backups.volumes("main", "other").build();
+export const { createBackup, restoreBackup } = Backups.volumes("main").build();
