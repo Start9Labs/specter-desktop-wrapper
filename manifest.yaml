@@ -1,10 +1,10 @@
 id: specter 
 title: Specter
-version: 1.13.1
+version: 1.14.5.2
 release-notes: | 
-  * Update to run on x86_64 architecture
-  * Update to v1.13.1, official release notes here: https://github.com/cryptoadvance/specter-desktop/tree/v1.13.1
-  * Fix backup restore
+  * Update to v1.14.5, official release notes here: https://github.com/cryptoadvance/specter-desktop/releases/tag/v1.14.5
+  * Use Bitcoin Core by default
+  * Update backups to use new eOS APIs 
 license: mit
 wrapper-repo: https://github.com/Start9Labs/specter-wrapper
 upstream-repo: https://github.com/cryptoadvance/specter-desktop
@@ -64,7 +64,7 @@ dependencies:
   btc-rpc-proxy:
     version: ">=0.3.2.1 <0.4.0"
     requirement:
-      type: "opt-out"
+      type: "opt-in"
       how: Can alternatively configure proxy or bitcoin core node.
     description: Used for RPC permissioning.
     config:
@@ -84,31 +84,9 @@ dependencies:
         type: script
 backup:
   create:
-    type: docker
-    image: compat
-    system: true 
-    entrypoint: compat 
-    args: 
-      - duplicity
-      - create
-      - /mnt/backup
-      - /root/data
-    mounts:
-      BACKUP: "/mnt/backup" 
-      main: "/root/data"
+    type: script
   restore:
-    type: docker
-    image: compat
-    system: true
-    entrypoint: compat
-    args:
-      - duplicity
-      - restore
-      - /mnt/backup
-      - /root/data
-    mounts:
-      BACKUP: "/mnt/backup"
-      main: "/root/data"
+    type: script
 migrations:
   from:
     "*":
