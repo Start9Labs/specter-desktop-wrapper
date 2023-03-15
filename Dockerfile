@@ -1,19 +1,27 @@
 ARG USER=specter
 ARG DIR=/data/
-ARG VERSION=v2.0.0
 
-FROM python:3.10-slim AS builder
+FROM python:3.10-slim-bullseye AS builder
 
-RUN apt update && apt install -y git build-essential libusb-1.0-0-dev libudev-dev libffi-dev libssl-dev
 ARG VERSION
+ARG REPO
+
+RUN apt update && apt install -y git build-essential libusb-1.0-0-dev libudev-dev libffi-dev libssl-dev rustc cargo libpq-dev
+
 WORKDIR /build
-COPY specter-desktop/ .
-RUN sed -i "s/vx.y.z-get-replaced-by-release-script/${VERSION}/g; " setup.py
+
+COPY specter-desktop/ ./specter-desktop
+COPY ./.git ./.git
+
+WORKDIR specter-desktop
+
+#RUN ls -al && sleep 30
+
 RUN pip3 install --upgrade pip
 RUN pip3 install babel cryptography
 RUN pip3 install .
 
-FROM python:3.10-slim AS final
+FROM python:3.10-slim-bullseye AS final
 
 # arm64 or amd64
 ARG PLATFORM
