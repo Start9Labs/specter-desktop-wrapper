@@ -1,8 +1,8 @@
 ARG USER=specter
 ARG DIR=/data/
-ARG VERSION=v1.14.5
+ARG VERSION=v2.0.0
 
-FROM python:3.9-slim AS builder
+FROM python:3.10-slim AS builder
 
 RUN apt update && apt install -y git build-essential libusb-1.0-0-dev libudev-dev libffi-dev libssl-dev
 ARG VERSION
@@ -13,7 +13,7 @@ RUN pip3 install --upgrade pip
 RUN pip3 install babel cryptography
 RUN pip3 install .
 
-FROM python:3.9-slim AS final
+FROM python:3.10-slim AS final
 
 # arm64 or amd64
 ARG PLATFORM
@@ -32,7 +32,7 @@ USER $USER
 # Make config directory
 RUN mkdir -p "$DIR/.specter/"
 # Copy over python stuff
-COPY --from=builder /usr/local/lib/python3.9 /usr/local/lib/python3.9
+COPY --from=builder /usr/local/lib/python3.10 /usr/local/lib/python3.10
 COPY --from=builder /usr/local/bin /usr/local/bin
 
 USER root
