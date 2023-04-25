@@ -16,6 +16,7 @@ The following set of dependencies are required to build this project. You can fi
 - [toml](https://crates.io/crates/toml-cli)
 - [embassy-sdk](https://github.com/Start9Labs/embassy-os/tree/master/backend)
 - [make](https://www.gnu.org/software/make/)
+- [md-packer](https://github.com/Start9Labs/md-packer)
 
 ## Build environment
 Prepare your embassyOS build environment. In this example we are using Ubuntu 20.04.
