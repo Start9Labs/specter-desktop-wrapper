@@ -7,7 +7,7 @@ RUN apt clean; \
     /var/lib/apt/lists/* \
     /var/tmp/*
 
-FROM lncm/specter-desktop:v2.0.1
+FROM lncm/specter-desktop:v2.0.2-pre2
 
 USER root
 COPY --from=builder /usr/local/bin/yq /usr/local/bin/yq

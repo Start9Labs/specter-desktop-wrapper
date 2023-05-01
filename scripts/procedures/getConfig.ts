@@ -14,9 +14,10 @@ export const getConfig: types.ExpectedExports.getConfig = compat.getConfig({
       "variant-names": {
         "internal": "Bitcoin Core",
         "internal-proxy": "Bitcoin Proxy",
+        "electrs": "Electrs",
       },
     },
-    "default": "internal",
+    "default": "electrs",
     "variants": {
       "internal": {
         "user": {
@@ -60,6 +61,18 @@ export const getConfig: types.ExpectedExports.getConfig = compat.getConfig({
           "target": "config",
           "multi": false,
           "selector": '$.users.[?(@.name == "specter")].password',
+        },
+      },
+      "electrs": {
+        "user": {
+          "type": "pointer",
+          "name": "RPC Username",
+          "description": "The username for the RPC user for Bitcoin Core",
+          "subtype": "package",
+          "package-id": "bitcoind",
+          "target": "config",
+          "selector": "$.rpc.username",
+          "multi": false,
         },
       },
     },
