@@ -216,5 +216,14 @@ export const dependencies: T.ExpectedExports.dependencies = {
       }
       return { result: configInput };
     },
+    electrs: {
+      async check(effects, configInput) {
+        effects.info("check electrs");
+        const config = matchBitcoindConfig.unsafeCast(configInput);
+  
+  
+        return { result: null };
+      },
+    },
   },
 };

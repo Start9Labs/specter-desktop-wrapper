@@ -77,4 +77,10 @@ export const getConfig: types.ExpectedExports.getConfig = compat.getConfig({
       },
     },
   },
+  "block-explorer": {
+    "name": "use mempool",
+    "description": "use awesome self hosted mempool",
+    "type": "boolean",
+    "default": false,
+  },
 })

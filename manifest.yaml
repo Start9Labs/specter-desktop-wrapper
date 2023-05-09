@@ -80,6 +80,17 @@ dependencies:
         type: script
       auto-configure:
         type: script
+  electrs:
+    version: ">=0.9.13.1 < 1.0.0"
+    requirement:
+      type: "opt-out"
+      how: "User selects electrs"
+    description: Faster than connecting directly to bitcoin core.
+    config:
+      check:
+        type: script
+      auto-configure:
+        type: script 
 backup:
   create:
     type: script
