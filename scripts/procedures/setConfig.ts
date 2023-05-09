@@ -15,9 +15,15 @@ export const setConfig: T.ExpectedExports.setConfig = async (
   const dependsOnBitcoind: { [key: string]: string[] } = newConfig?.txindex
     ? { bitcoind: [] }
     : {};
+    const dependsOnMempool: { [key: string]: string[] } = newConfig?.[
+      "enable-electrs"
+    ]
+      ? { electrs: [] }
+      : {};
     
   return compat.setConfig(effects, newConfig, {
     ...dependsOnElectrs,
     ...dependsOnBitcoind,
+    ...dependsOnMempool,
   });
 };

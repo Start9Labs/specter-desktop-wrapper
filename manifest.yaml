@@ -86,11 +86,12 @@ dependencies:
       type: "opt-out"
       how: "User selects electrs"
     description: Faster than connecting directly to bitcoin core.
-    # config:
-    #   check:
-    #     type: script
-    #   auto-configure:
-    #     type: script 
+  mempool:
+    version: ">=2.5.0.1 < 3.0.0"
+    requirement:
+      type: "opt-in"
+      how: "Your local mempool service will be used"
+    description: Use your local mempool service to look up addresses or transactions directly from Specter
 backup:
   create:
     type: script

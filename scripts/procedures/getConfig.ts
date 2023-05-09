@@ -78,9 +78,16 @@ export const getConfig: types.ExpectedExports.getConfig = compat.getConfig({
     },
   },
   "block-explorer": {
-    "name": "use mempool",
-    "description": "use awesome self hosted mempool",
-    "type": "boolean",
-    "default": false,
+    "tor-address": {
+      "type": "pointer",
+      "name": "mempool",
+      "description": "mempool",
+      "subtype": "package",
+      "package-id": "mempool",
+      "target": "config",
+      "selector": "$.tor-address",
+      "multi": false,
+      "default": false,
+    },
   },
 })

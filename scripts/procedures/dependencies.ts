@@ -236,4 +236,23 @@ export const dependencies: T.ExpectedExports.dependencies = {
       return { result: configInput };
     },
   },
+  mempool: {
+    async check(effects, configInput) {
+      effects.info("check mempool");
+      const config = matchBitcoindConfig.unsafeCast(configInput);
+
+
+      return { result: null };
+    },
+    async autoConfigure(effects, configInput) {
+      effects.info("autoconfigure mempool");
+      for (const checker of checks) {
+        const error = checker.currentError(configInput);
+        if (error) {
+          checker.fix(configInput);
+        }
+      }
+      return { result: configInput };
+    },
+  },
 };
