@@ -64,14 +64,14 @@ export const getConfig: types.ExpectedExports.getConfig = compat.getConfig({
         },
       },
       "electrs": {
-        "user": {
+        "electrum-tor-address": {
           "type": "pointer",
           "name": "RPC Username",
-          "description": "The username for the RPC user for Bitcoin Core",
+          "description": "electrsssssss",
           "subtype": "package",
-          "package-id": "bitcoind",
+          "package-id": "electrs",
           "target": "config",
-          "selector": "$.rpc.username",
+          "selector": "$.electrum-tor-address",
           "multi": false,
         },
       },

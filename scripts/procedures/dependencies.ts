@@ -216,14 +216,24 @@ export const dependencies: T.ExpectedExports.dependencies = {
       }
       return { result: configInput };
     },
-    electrs: {
-      async check(effects, configInput) {
-        effects.info("check electrs");
-        const config = matchBitcoindConfig.unsafeCast(configInput);
-  
-  
-        return { result: null };
-      },
+  },  
+  electrs: {
+    async check(effects, configInput) {
+      effects.info("check electrs");
+      const config = matchBitcoindConfig.unsafeCast(configInput);
+
+
+      return { result: null };
+    },
+    async autoConfigure(effects, configInput) {
+      effects.info("autoconfigure electrs");
+      for (const checker of checks) {
+        const error = checker.currentError(configInput);
+        if (error) {
+          checker.fix(configInput);
+        }
+      }
+      return { result: configInput };
     },
   },
 };

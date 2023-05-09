@@ -86,11 +86,11 @@ dependencies:
       type: "opt-out"
       how: "User selects electrs"
     description: Faster than connecting directly to bitcoin core.
-    config:
-      check:
-        type: script
-      auto-configure:
-        type: script 
+    # config:
+    #   check:
+    #     type: script
+    #   auto-configure:
+    #     type: script 
 backup:
   create:
     type: script
