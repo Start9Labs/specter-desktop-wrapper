@@ -11,6 +11,7 @@ BTC_RPC_USER="$(yq e '.bitcoind.user' /root/start9/config.yaml)"
 BTC_RPC_PASSWORD="$(yq e '.bitcoind.password' /root/start9/config.yaml)"
 BLOCK_EXPLORER="$(yq e '.block-explorer' /root/start9/config.yaml)"
 MEMPOOL_LAN_ADDRESS="$(yq e '.mempool-lan-address' /root/start9/config.yaml)"
+echo $MEMPOOL_LAN_ADDRESS
 
 if [ ! -f /root/.specter/config.json ]; then
     # File doesn't exist
@@ -82,7 +83,7 @@ fi
 
 if [ "$BLOCK_EXPLORER" = "true" ]; then
   #Use jq to edit the config file
-  jq '.explorers.main = '"'$MEMPOOL_LAN_ADDRESS'"'' /root/.specter/config.json > tmp.json && mv tmp.json /root/.specter/config.json
+  jq '.explorers.main = "https://'"$MEMPOOL_LAN_ADDRESS"'/"' /root/.specter/config.json > tmp.json && mv tmp.json /root/.specter/config.json
 fi
 
 python3 -m cryptoadvance.specter server --host 0.0.0.0 &
