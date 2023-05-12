@@ -11,7 +11,6 @@ BTC_RPC_USER="$(yq e '.bitcoind.user' /root/start9/config.yaml)"
 BTC_RPC_PASSWORD="$(yq e '.bitcoind.password' /root/start9/config.yaml)"
 BLOCK_EXPLORER="$(yq e '.block-explorer' /root/start9/config.yaml)"
 MEMPOOL_LAN_ADDRESS="$(yq e '.mempool-lan-address' /root/start9/config.yaml)"
-echo $MEMPOOL_LAN_ADDRESS
 
 if [ ! -f /root/.specter/config.json ]; then
     # File doesn't exist
