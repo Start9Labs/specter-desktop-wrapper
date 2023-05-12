@@ -27,6 +27,10 @@ const matchProxyConfig = shape({
   ),
 });
 
+const matchMempoolConfig = shape({
+    "enable-electrs": boolean,
+});
+
 function times<T>(fn: (i: number) => T, amount: number): T[] {
   const answer = new Array(amount);
   for (let i = 0; i < amount; i++) {
@@ -216,14 +220,22 @@ export const dependencies: T.ExpectedExports.dependencies = {
       }
       return { result: configInput };
     },
-    electrs: {
-      async check(effects, configInput) {
-        effects.info("check electrs");
-        const config = matchBitcoindConfig.unsafeCast(configInput);
-  
-  
-        return { result: null };
-      },
+  },
+  mempool: {
+    async check(effects, configInput) {
+      effects.info("check mempool");
+      const config = matchMempoolConfig.unsafeCast(configInput);
+      if (!config["enable-electrs"]) {
+        return { error: "Must have address lookups enabled in mempool" };
+      }
+
+      return { result: null };
+    },
+    async autoConfigure(effects, configInput) {
+      effects.info("autoconfigure mempool");
+      const config = configInput as any;
+      config["enable-electrs"] = true;
+      return { result: config };
     },
   },
 };

@@ -9,11 +9,13 @@ export const setConfig: T.ExpectedExports.setConfig = async (
   input
 ) => {
   const newConfig = input as any;
-  const dependsOnElectrs: { [key: string]: string[] } = newConfig?.[
-    "enable-electrs"
-  ]
-    ? { electrs: ["synced"] }
-    : {};
+  const dependsOnElectrs: { [key: string]: string[] } = newConfig?.bitcoind?.type === "electrs"  ? { electrs: ["synced"] } : {};
+  const dependsOnMempool: T.DependsOn = newConfig?.["block-explorer"]  ? { mempool: ["enable-electrs"] } : {};
+  // const dependsOnElectrs: { [key: string]: string[] } = newConfig?.[
+  //   "bitcoind.type"
+  // ]
+    // ? { electrs: ["synced"] }
+    // : {};
   const dependsOnBitcoind: { [key: string]: string[] } = newConfig?.txindex
     ? { bitcoind: [] }
     : {};
@@ -21,5 +23,6 @@ export const setConfig: T.ExpectedExports.setConfig = async (
   return compat.setConfig(effects, newConfig, {
     ...dependsOnElectrs,
     ...dependsOnBitcoind,
+    ...dependsOnMempool,
   });
 };

@@ -86,6 +86,12 @@ dependencies:
       type: "opt-out"
       how: "User selects electrs"
     description: Faster than connecting directly to bitcoin core.
+  mempool:
+    version: ">=2.5.0~1 < 2.6"
+    requirement:
+      type: "opt-in"
+      how: "User selects block explorer"
+    description: Use local mempool service
     config:
       check:
         type: script
