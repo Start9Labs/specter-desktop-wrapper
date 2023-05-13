@@ -163,6 +163,7 @@ export const dependencies: T.ExpectedExports.dependencies = {
     // deno-lint-ignore require-await
     async check(effects, configInput) {
       effects.info("check bitcoind");
+      // deno-lint-ignore no-explicit-any
       const config = configInput as any; //matchBitcoindConfig.unsafeCast(configInput);
       if (!config.rpc.enable) {
         return { error: "Must have RPC enabled" };
@@ -184,6 +185,7 @@ export const dependencies: T.ExpectedExports.dependencies = {
     // deno-lint-ignore require-await
     async autoConfigure(effects, configInput) {
       effects.info("autoconfigure bitcoind");
+      // deno-lint-ignore no-explicit-any
       const config = configInput as any; //matchBitcoindConfig.unsafeCast(configInput);
       config.rpc.enable = true;
       config.advanced.blockfilters.blockfilterindex = true;
@@ -222,18 +224,19 @@ export const dependencies: T.ExpectedExports.dependencies = {
     },
   },
   mempool: {
+    // deno-lint-ignore require-await
     async check(effects, configInput) {
       effects.info("check mempool");
       const config = matchMempoolConfig.unsafeCast(configInput);
       if (!config["enable-electrs"]) {
         return { error: "Must have address lookups enabled in mempool" };
       }
-
       return { result: null };
     },
+    // deno-lint-ignore require-await
     async autoConfigure(effects, configInput) {
       effects.info("autoconfigure mempool");
-      const config = configInput as any;
+      const config = matchMempoolConfig.unsafeCast(configInput);
       config["enable-electrs"] = true;
       return { result: config };
     },
