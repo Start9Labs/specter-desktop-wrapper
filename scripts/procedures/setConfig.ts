@@ -9,11 +9,18 @@ export const setConfig: T.ExpectedExports.setConfig = async (
 ) => {
   // deno-lint-ignore no-explicit-any
   const newConfig = input as any;
-    
+  
+  const dependsOnElectrs: T.DependsOn = newConfig?.bitcoind?.type === "electrs"  ? { electrs: ["synced"] } : {};
+  const dependsOnBitcoind: T.DependsOn = newConfig?.bitcoind?.type  === "internal" ? { bitcoind: [] }  : {};
+  const dependsOnProxy: T.DependsOn = newConfig?.bitcoind?.type  === "internal-proxy" ? { bitcoind: [] }  : {};
+  
   // add a dependency on mempool if block explorer is enabled in the config
-  const dependsOnMempool: T.DependsOn = newConfig?.["block-explorer"] ? { mempool: [] } : {};
-
+  const dependsOnMempool: T.DependsOn = newConfig?.["block-explorer"] === true ? { mempool: [] } : {};
+    
   return await compat.setConfig(effects, input, {
+    ...dependsOnElectrs,
+    ...dependsOnBitcoind,
+    ...dependsOnProxy,
     ...dependsOnMempool,
   });
 };
