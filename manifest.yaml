@@ -73,7 +73,8 @@ dependencies:
   bitcoind:
     version: ">=23.0.0 <26.0.0"
     requirement:
-      type: "opt-out"
+      type: "opt-in"
+      how: Can alternatively configure proxy or electrs
     description: Used to subscribe to new block events from a full archival node.
     config:
       check: 
@@ -83,7 +84,7 @@ dependencies:
   electrs:
     version: ">=0.9.13.1 < 1.0.0"
     requirement:
-      type: "opt-out"
+      type: "opt-in"
       how: "User selects electrs"
     description: Faster than connecting directly to bitcoin core.
   mempool:
