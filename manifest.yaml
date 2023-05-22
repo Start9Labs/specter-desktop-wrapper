@@ -73,7 +73,7 @@ dependencies:
   bitcoind:
     version: ">=23.0.0 <26.0.0"
     requirement:
-      type: "required"
+      type: "opt-out"
     description: Used to subscribe to new block events from a full archival node.
     config:
       check: 
