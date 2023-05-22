@@ -238,7 +238,7 @@ export const dependencies: T.ExpectedExports.dependencies = {
       effects.info("autoconfigure mempool");
       const config = matchMempoolConfig.unsafeCast(configInput);
       config["enable-electrs"] = true;
-      return { result: config };
+      return { result: configInput };
     },
   },
 };

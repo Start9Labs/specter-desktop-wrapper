@@ -2,7 +2,6 @@ FROM debian:stable-slim as builder
 RUN apt update && apt install -y curl jq
 RUN curl -sS https://webi.sh/yq | sh; mv /root/.local/bin/yq /usr/local/bin
 #RUN curl -sS https://webi.sh/jq | sh; mv /root/.local/bin/jq /usr/local/bin
-#RUN mv /usr/bin/jq /usr/local/bin
 
 RUN apt clean; \
     rm -rf \
