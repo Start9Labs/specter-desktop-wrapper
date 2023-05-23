@@ -27,9 +27,9 @@ const matchProxyConfig = shape({
   ),
 });
 
-const matchMempoolConfig = shape({
-    "enable-electrs": boolean,
-});
+// const matchMempoolConfig = shape({
+//     "enable-electrs": boolean,
+// });
 
 function times<T>(fn: (i: number) => T, amount: number): T[] {
   const answer = new Array(amount);
@@ -223,22 +223,22 @@ export const dependencies: T.ExpectedExports.dependencies = {
       return { result: configInput };
     },
   },
-  mempool: {
-    // deno-lint-ignore require-await
-    async check(effects, configInput) {
-      effects.info("check mempool");
-      const config = matchMempoolConfig.unsafeCast(configInput);
-      if (!config["enable-electrs"]) {
-        return { error: "Must have address lookups enabled in mempool" };
-      }
-      return { result: null };
-    },
-    // deno-lint-ignore require-await
-    async autoConfigure(effects, configInput) {
-      effects.info("autoconfigure mempool");
-      const config = matchMempoolConfig.unsafeCast(configInput);
-      config["enable-electrs"] = true;
-      return { result: config };
-    },
-  },
+  // mempool: {
+  //   // deno-lint-ignore require-await
+  //   async check(effects, configInput) {
+  //     effects.info("check mempool");
+  //     const config = matchMempoolConfig.unsafeCast(configInput);
+  //     if (!config["enable-electrs"]) {
+  //       return { error: "Must have address lookups enabled in mempool" };
+  //     }
+  //     return { result: null };
+  //   },
+  //   // deno-lint-ignore require-await
+  //   async autoConfigure(effects, configInput) {
+  //     effects.info("autoconfigure mempool");
+  //     const config = matchMempoolConfig.unsafeCast(configInput);
+  //     config["enable-electrs"] = true;
+  //     return { result: config };
+  //   },
+  // },
 };

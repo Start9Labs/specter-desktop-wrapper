@@ -34,6 +34,7 @@ clean:
 	rm -rf docker-images
 	rm -f $(PKG_ID).s9pk
 	rm -f scripts/*.js
+	rm -f scripts/embassy.js
 
 $(PKG_ID).s9pk: manifest.yaml instructions.md icon.png LICENSE scripts/embassy.js docker-images/aarch64.tar docker-images/x86_64.tar
 ifeq ($(ARCH),aarch64)

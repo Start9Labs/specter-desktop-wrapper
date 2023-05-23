@@ -82,22 +82,22 @@ dependencies:
       auto-configure:
         type: script
   electrs:
-    version: ">=0.9.13.1 < 1.0.0"
+    version: ">=0.9.13.1 <1.0.0"
     requirement:
       type: "opt-in"
       how: "User selects electrs"
     description: Faster than connecting directly to bitcoin core.
-  mempool:
-    version: ">=2.5.0~1 < 2.6"
-    requirement:
-      type: "opt-in"
-      how: "User selects block explorer"
-    description: Use local mempool service
-    config:
-      check:
-        type: script
-      auto-configure:
-        type: script 
+  # mempool:
+  #   version: ">=2.5.0.1 <2.6"
+  #   requirement:
+  #     type: "opt-in"
+  #     how: "User selects block explorer"
+  #   description: Use local mempool service
+  #   config:
+  #     check:
+  #       type: script
+  #     auto-configure:
+  #       type: script 
 backup:
   create:
     type: script

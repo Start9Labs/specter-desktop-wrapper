@@ -15,12 +15,12 @@ export const setConfig: T.ExpectedExports.setConfig = async (
   const dependsOnProxy: T.DependsOn = newConfig?.bitcoind?.type  === "internal-proxy" ? { "btc-rpc-proxy": [] }  : {};
   
   // add a dependency on mempool if block explorer is enabled in the config
-  const dependsOnMempool: T.DependsOn = newConfig["block-explorer"] ? { mempool: [] } : {};
+  // const dependsOnMempool: T.DependsOn = newConfig?.["block-explorer"] ? { mempool: [] } : {};
     
   return await compat.setConfig(effects, input, {
     ...dependsOnElectrs,
     ...dependsOnBitcoind,
     ...dependsOnProxy,
-    ...dependsOnMempool,
+    // ...dependsOnMempool,
   });
 };
