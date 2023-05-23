@@ -26,7 +26,7 @@ export const getConfig: types.ExpectedExports.getConfig = compat.getConfig({
         "electrs": "Electrs",
       },
     },
-    "default": "electrs",
+    "default": "internal",
     "variants": {
       "internal": {
         "user": {
