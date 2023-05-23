@@ -19,7 +19,7 @@ export const getConfig: types.ExpectedExports.getConfig = compat.getConfig({
       "id": "type",
       "name": "Type",
       "description":
-        "- Bitcoin Core: The Bitcoin Core service installed to your Embassy\n- Bitcoin Proxy: The Bitcoin Proxy service installed on your Embassy\n",
+        "Choose between Bitcoin Core, Bitcoin Proxy and Electrs. Bitcoin Core is the default and will work great. Bitcoin Proxy should only be used if you're running a pruned bitcoin node. Electrs will provide the best overall experience but will require additional resource usage from your server.",
       "variant-names": {
         "internal": "Bitcoin Core",
         "internal-proxy": "Bitcoin Proxy",

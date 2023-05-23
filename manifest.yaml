@@ -63,7 +63,7 @@ dependencies:
     version: ">=0.3.2.1 <0.4.0"
     requirement:
       type: "opt-in"
-      how: Can alternatively configure proxy or bitcoin core node.
+      how: Alternatively you can use Bitcoin Core or Electrs
     description: Used for RPC permissioning.
     config:
       check:
@@ -73,7 +73,8 @@ dependencies:
   bitcoind:
     version: ">=23.0.0 <26.0.0"
     requirement:
-      type: "required"
+      type: "opt-out"
+      how: Alternatively you can use Bitcoin Proxy or Electrs
     description: Used to subscribe to new block events from a full archival node.
     config:
       check: 
@@ -84,7 +85,7 @@ dependencies:
     version: ">=0.9.13.1 <1.0.0"
     requirement:
       type: "opt-in"
-      how: "User selects electrs"
+      how: Alternatively you can use Bitcoin Core or Bitcoin Proxy
     description: Faster than connecting directly to bitcoin core.
   # mempool:
   #   version: ">=2.5.0.1 <2.6"
