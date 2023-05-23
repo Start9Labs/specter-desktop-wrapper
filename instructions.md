@@ -6,12 +6,4 @@ You can also connect via Bitcoin Proxy which is the same as connecting directly 
 
 # Using a Signing Device with Specter
 
-There are two ways to create a wallet from a signing device using Specter
-
-Some signing devices permit you to "air gap" which means transferring the xpub (and subsequent unsigned/signed transactions) back and forth between Specter and the signing device via an SD card (Coldcard for example) - other devices require a direct USB connection between the device and Specter (Trezor One for example).
-
-## USB Connected Signing Devices:
-
-For devices like the Trezor One, air gapping is not possible. This means importing xpubs via USB - Specter permits this via the HWI which requires running a second instance of Specter on your *local* machine (i.e *not* your Embassy).
-
-For detailed instructions on how to use signing devices see our documentation [here](https://docs.start9.com/latest/user-manual/service-guides/specter/specter-service)
+If you would like to know how to use a signing device with Specter, please see see our documentation [here](https://docs.start9.com/latest/user-manual/service-guides/specter/specter-service)

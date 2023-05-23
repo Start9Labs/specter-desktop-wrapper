@@ -46,7 +46,7 @@ else
 endif
 	@embassy-sdk pack
 
-instructions.md: docs/instructions.md $(DOC_ASSETS)
+instructions.md: instructions.md $(DOC_ASSETS)
 	cd docs && md-packer < instructions.md > ../instructions.md
 
 docker-images/x86_64.tar: Dockerfile docker_entrypoint.sh $(ASSET_PATHS)
