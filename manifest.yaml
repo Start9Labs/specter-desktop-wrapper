@@ -1,10 +1,10 @@
 id: specter 
 title: Specter
-version: 1.14.5.4
+version: 2.0.2.1
 release-notes: | 
-  * Update to v1.14.5, official release notes here: https://github.com/cryptoadvance/specter-desktop/releases/tag/v1.14.5
-  * Use Bitcoin Core by default
-  * Update backups to use new eOS APIs 
+  * Update to v2.0.2, official release notes for v2.0.0 [here.](https://github.com/cryptoadvance/specter-desktop/releases/tag/v2.0.0)
+  * Adds the ability for Specter to connect via Electrs.
+  * WARNING: While no data will be lost in this update, you will be directed to recreate your wallet(s) once you open Specter for the first time.
 license: mit
 wrapper-repo: https://github.com/Start9Labs/specter-wrapper
 upstream-repo: https://github.com/cryptoadvance/specter-desktop
@@ -65,7 +65,7 @@ dependencies:
     version: ">=0.3.2.1 <0.4.0"
     requirement:
       type: "opt-in"
-      how: Can alternatively configure proxy or bitcoin core node.
+      how: Alternatively you can use Bitcoin Core or Electrs
     description: Used for RPC permissioning.
     config:
       check:
@@ -75,13 +75,31 @@ dependencies:
   bitcoind:
     version: ">=23.0.0 <26.0.0"
     requirement:
-      type: "required"
+      type: "opt-out"
+      how: Alternatively you can use Bitcoin Proxy or Electrs
     description: Used to subscribe to new block events from a full archival node.
     config:
       check: 
         type: script
       auto-configure:
         type: script
+  electrs:
+    version: ">=0.9.13.1 <1.0.0"
+    requirement:
+      type: "opt-in"
+      how: Alternatively you can use Bitcoin Core or Bitcoin Proxy
+    description: Faster than connecting directly to bitcoin core.
+  # mempool:
+  #   version: ">=2.5.0.1 <2.6"
+  #   requirement:
+  #     type: "opt-in"
+  #     how: "User selects block explorer"
+  #   description: Use local mempool service
+  #   config:
+  #     check:
+  #       type: script
+  #     auto-configure:
+  #       type: script 
 backup:
   create:
     type: script
