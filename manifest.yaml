@@ -3,7 +3,7 @@ title: Specter
 version: 2.0.2
 release-notes: | 
   * Update to v2.0.2, official release notes [here](https://github.com/cryptoadvance/specter-desktop/releases/tag/v2.0.1)
-  * WARNING: While no data will be lost in this update, you will need to recreate your wallet(s).
+  * WARNING: While no data will be lost in this update, you will be directed to recreate your wallet(s) once you open Specter for the first time.
 license: mit
 wrapper-repo: https://github.com/Start9Labs/specter-wrapper
 upstream-repo: https://github.com/cryptoadvance/specter-desktop
