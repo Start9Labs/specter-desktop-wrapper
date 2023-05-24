@@ -2,7 +2,7 @@ id: specter
 title: Specter
 version: 2.0.2
 release-notes: | 
-  * Update to v2.0.2, official release notes [here](https://github.com/cryptoadvance/specter-desktop/releases/tag/v2.0.1)
+  * Update to v2.0.2, official release notes for v2.0.0 [here.](https://github.com/cryptoadvance/specter-desktop/releases/tag/v2.0.0)
   * WARNING: While no data will be lost in this update, you will be directed to recreate your wallet(s) once you open Specter for the first time.
 license: mit
 wrapper-repo: https://github.com/Start9Labs/specter-wrapper
