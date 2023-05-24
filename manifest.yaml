@@ -1,8 +1,9 @@
 id: specter 
 title: Specter
-version: 2.0.2
+version: 2.0.2.1
 release-notes: | 
   * Update to v2.0.2, official release notes for v2.0.0 [here.](https://github.com/cryptoadvance/specter-desktop/releases/tag/v2.0.0)
+  * Adds the ability for Specter to connect via Electrs.
   * WARNING: While no data will be lost in this update, you will be directed to recreate your wallet(s) once you open Specter for the first time.
 license: mit
 wrapper-repo: https://github.com/Start9Labs/specter-wrapper

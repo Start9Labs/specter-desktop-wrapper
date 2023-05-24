@@ -84,27 +84,6 @@ EOF
 rm -f /root/.specter/nodes/bitcoin_core.json
 rm -f /root/.specter/nodes/default.json
 
-# elif [ "$BTC_RPC_TYPE" = "internal" ]; then
-#   jq '.active_node_alias = "bitcoin_core"' /root/.specter/config.json > /root/.specter/config.tmp && mv /root/.specter/config.tmp /root/.specter/config.json
-#   cat <<EOF > /root/.specter/nodes/bitcoin_core.json
-# {
-#     "python_class": "cryptoadvance.specter.node.Node",
-#     "fullpath": "/root/.specter/nodes/bitcoin_core.json",
-#     "name": "Bitcoin Core",
-#     "alias": "bitcoin_core",
-#     "autodetect": false,
-#     "datadir": "",
-#     "user": "$BTC_RPC_USER",
-#     "password": "$BTC_RPC_PASSWORD",
-#     "port": "8332",
-#     "host": "bitcoind.embassy",
-#     "protocol": "http",
-#     "node_type": "BTC"
-# }
-# EOF
-
-# rm -f /root/.specter/nodes/spectrum_node.json
-
 fi
 
 # if [ "$BLOCK_EXPLORER" = "true" ]; then

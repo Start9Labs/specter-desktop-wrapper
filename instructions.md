@@ -6,4 +6,8 @@ You can also connect via Bitcoin Proxy which is the same as connecting directly 
 
 # Using a Signing Device with Specter
 
-If you would like to know how to use a signing device with Specter, please see see our documentation [here](https://docs.start9.com/latest/user-manual/service-guides/specter/specter-service)
+If you would like to know how to use a signing device with Specter please see see our documentation [here](https://docs.start9.com/latest/user-manual/service-guides/specter/specter-service)
+
+# Using your local Mempool service as a block explorer
+
+If you'd like to use your own Mempool to open links in Specter head to "Settings" -> "Block Explorer URL" and input either the .local or .onion address of your Mempool service.
