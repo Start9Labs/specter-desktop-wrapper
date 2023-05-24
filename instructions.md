@@ -1,4 +1,4 @@
-# Connecting to the bitcoin network
+# Connecting to the Bitcoin Network
 
 Specter can be configured to connect to the bitcoin network via Bitcoin Core - this is the default option and is the least demanding on your server. However it will be very slow to rescan after adding a new wallet. Electrs can be used instead which will be far faster, but is not advisible if you are running less powerful hardware.
 
