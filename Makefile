@@ -15,7 +15,7 @@ verify: $(PKG_ID).s9pk
 	@echo " Done!"
 	@echo "   Filesize: $(shell du -h $(PKG_ID).s9pk) is ready"
 
-install:
+install: verify
 ifeq (,$(wildcard ~/.embassy/config.yaml))
 	@echo; echo "You must define \"host: http://embassy-server-name.local\" in ~/.embassy/config.yaml config file first"; echo
 else
@@ -46,7 +46,7 @@ else
 endif
 	@embassy-sdk pack
 
-instructions.md: instructions.md $(DOC_ASSETS)
+instructions.md: $(DOC_ASSETS)
 	cd docs && md-packer < instructions.md > ../instructions.md
 
 docker-images/x86_64.tar: Dockerfile docker_entrypoint.sh $(ASSET_PATHS)

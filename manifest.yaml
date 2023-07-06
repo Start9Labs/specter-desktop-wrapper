@@ -1,10 +1,8 @@
 id: specter 
 title: Specter
-version: 2.0.2.1
+version: 2.0.2.2
 release-notes: | 
-  * Update to v2.0.2, official release notes for v2.0.0 [here.](https://github.com/cryptoadvance/specter-desktop/releases/tag/v2.0.0)
-  * Adds the ability for Specter to connect via Electrs.
-  * WARNING: While no data will be lost in this update, you will be directed to recreate your wallet(s) once you open Specter for the first time.
+  * Remove deprecated optional dependency of BTC RPC Proxy
 license: mit
 wrapper-repo: https://github.com/Start9Labs/specter-wrapper
 upstream-repo: https://github.com/cryptoadvance/specter-desktop
@@ -61,23 +59,12 @@ interfaces:
       - tcp
       - http
 dependencies:
-  btc-rpc-proxy:
-    version: ">=0.3.2.1 <0.4.0"
-    requirement:
-      type: "opt-in"
-      how: Alternatively you can use Bitcoin Core or Electrs
-    description: Used for RPC permissioning.
-    config:
-      check:
-        type: script
-      auto-configure:
-        type: script
   bitcoind:
-    version: ">=23.0.0 <26.0.0"
+    version: ">=23.0.0 <27.0.0"
     requirement:
       type: "opt-out"
-      how: Alternatively you can use Bitcoin Proxy or Electrs
-    description: Used to subscribe to new block events from a full archival node.
+      how: Alternatively can use Electrs
+    description: Used to subscribe to new block events.
     config:
       check: 
         type: script
@@ -87,19 +74,8 @@ dependencies:
     version: ">=0.9.13.1 <1.0.0"
     requirement:
       type: "opt-in"
-      how: Alternatively you can use Bitcoin Core or Bitcoin Proxy
-    description: Faster than connecting directly to bitcoin core.
-  # mempool:
-  #   version: ">=2.5.0.1 <2.6"
-  #   requirement:
-  #     type: "opt-in"
-  #     how: "User selects block explorer"
-  #   description: Use local mempool service
-  #   config:
-  #     check:
-  #       type: script
-  #     auto-configure:
-  #       type: script 
+      how: Alternatively can use Bitcoin Core
+    description: Faster than connecting directly to Bitcoin Core.
 backup:
   create:
     type: script
