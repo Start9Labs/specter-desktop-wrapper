@@ -3,7 +3,6 @@ title: Specter
 version: 2.0.2.2
 release-notes: | 
   * Remove deprecated optional dependency of BTC RPC Proxy
-  * Bump version bounds for Bitcoin Core
 license: mit
 wrapper-repo: https://github.com/Start9Labs/specter-wrapper
 upstream-repo: https://github.com/cryptoadvance/specter-desktop
